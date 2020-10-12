@@ -1,0 +1,7 @@
+*.xlsx
+*.xls
+/src/transform_tools/dist/
+/src/transform_tools/build/
+/src/unmerge_tools/dist/
+/src/unmerge_tools/build/
+/.idea/
