@@ -5,3 +5,6 @@
 /src/unmerge_tools/dist/
 /src/unmerge_tools/build/
 /.idea/
+/src/transform_tools/__pycache__/
+/src/unmerge_tools/__pycache__/
+*.spec
