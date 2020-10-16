@@ -3,7 +3,7 @@ import os
 import time
 
 from src.transform_tools.read_and_write import read_and_write
-from src.transform_tools.upper_char_to_int import char_to_int
+from src.transform_tools.char_to_int import str_to_int
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -21,8 +21,8 @@ if __name__ == "__main__":
             print("输入数据集的行列范围")
             data_row_begin = int(input('数据集起始行号：\n')) - 1
             data_row_end = int(input('数据集结束行号：\n')) - 1
-            data_col_begin = char_to_int(input('数据集起始列号(英文字母)：\n'))
-            data_col_end = char_to_int(input('数据集结束列号(英文字母)：\n'))
+            data_col_begin = str_to_int(input('数据集起始列号(英文字母或数字)：\n'))
+            data_col_end = str_to_int(input('数据集结束列号(英文字母或数字)：\n'))
 
             params = {
                 "filename_unmerged": filename_unmerged,
