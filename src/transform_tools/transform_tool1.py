@@ -3,6 +3,8 @@ import logging
 from openpyxl import Workbook
 
 from src.unmerge_tools.unmerge_tool import UnmergeTool
+from src.utils.exist_util import ExistUtil
+from src.utils.file_loader import FileLoader
 
 
 def str_to_int(chs: str) -> int:
@@ -21,10 +23,10 @@ def str_to_int(chs: str) -> int:
 
 class TransformTool1:
 
-    def __init__(self, filename: str, sheetname: str, data_row_begin: int,
+    def __init__(self, workbook: Workbook, worksheet, data_row_begin: int,
                  data_row_end: int, data_col_begin: int, data_col_end: int):
-        self.filename = filename
-        self.sheetname = sheetname
+        self.workbook = workbook
+        self.worksheet = worksheet
         self.data_row_begin = data_row_begin
         self.data_row_end = data_row_end
         self.data_col_begin = data_col_begin
@@ -39,7 +41,7 @@ class TransformTool1:
         logging.info(left_attrs)
         # 创建新表格
         new_workbook = Workbook()
-        new_sheet = new_workbook.create_sheet(self.sheetname)
+        new_sheet = new_workbook.create_sheet(worksheet.title)
 
         # 读取数据并写入到新表格
         new_row = 1
@@ -63,9 +65,8 @@ class TransformTool1:
         return new_workbook
 
     def excete(self) -> Workbook:
-        unmerge_tool = UnmergeTool(self.filename, self.sheetname)
-        workbook = unmerge_tool.excute()
-        worksheet = workbook[sheetname]
+        unmerge_tool = UnmergeTool(self.workbook, self.worksheet)
+        workbook, worksheet = unmerge_tool.excute()
         new_workbook = self.read_and_write(worksheet)
         return new_workbook
 
@@ -80,9 +81,11 @@ if __name__ == "__main__":
     data_row_end = int(input('数据集结束行号：\n'))
     data_col_begin = str_to_int(input('数据集起始列号(英文字母或数字)：\n'))
     data_col_end = str_to_int(input('数据集结束列号(英文字母或数字)：\n'))
-
-    transformTool1 = TransformTool1(filename, sheetname, data_row_begin, data_row_end, data_col_begin,
-                                    data_col_end)
-    new_workbook = transformTool1.excete()
-    new_workbook.save(filename.replace(".xlsx", "_" + sheetname + "转换1.xlsx"))
-    logging.info("转换成功！")
+    if ExistUtil.check_exists(filename, sheetname):
+        file_loader = FileLoader(filename, sheetname)
+        workbook, worksheet = file_loader.load_file()
+        transformTool1 = TransformTool1(workbook, worksheet, data_row_begin, data_row_end, data_col_begin,
+                                        data_col_end)
+        new_workbook = transformTool1.excete()
+        new_workbook.save(filename.replace(".xlsx", "_" + sheetname + "转换1.xlsx"))
+        logging.info("转换成功！")

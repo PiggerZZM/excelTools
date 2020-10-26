@@ -1,8 +1,8 @@
-# 传入xlrd读入的workbook
+import xlrd
 import xlwt
 
 
-def strip_util(workbook, name):
+def strip_util(workbook: xlrd.Workbook):
     new_workbook = xlwt.Workbook()
     sheet_names = workbook.sheet_names()
     for sheet_name in sheet_names:
@@ -13,4 +13,3 @@ def strip_util(workbook, name):
         for row in total_rows:
             for col in total_cols:
                 new_sheet.write(row, col, str(sheet.cell_value(row, col)).strip())
-    new_workbook.save(name.replace(".xlsx", "_strip.xlsx"))

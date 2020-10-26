@@ -1,7 +1,10 @@
 import logging
 from copy import deepcopy
 
-from openpyxl import load_workbook, Workbook
+from openpyxl import Workbook
+
+from src.utils.exist_util import ExistUtil
+from src.utils.file_loader import FileLoader
 
 '''
     在实例化前需要先判断excel文件以及工作表是否存在
@@ -10,22 +13,20 @@ from openpyxl import load_workbook, Workbook
 
 class UnmergeTool:
 
-    def __init__(self, filename: str, sheetname: str):
-        self.filename = filename
-        self.sheetname = sheetname
-        self.workbook = load_workbook(self.filename)  # 读取excel
-        self.worksheet = self.workbook[self.sheetname]  # 读取工作表
+    def __init__(self, workbook: Workbook, worksheet):
+        self.workbook = workbook
+        self.worksheet = worksheet
 
-    def excute(self) -> Workbook:
+    def excute(self):
         logging.info("正在拆分合并单元格，请稍等……")
         self.unmerge()
-        return self.workbook
+        return self.workbook, self.worksheet
 
     def unmerge(self):
         # 获取所有 合并单元格的 位置信息
         # 是个可迭代对象，单个对象类型：openpyxl.worksheet.cell_range.MultiCellRange
         merged_list = deepcopy(self.worksheet.merged_cells)  # 深拷贝，进行拆分单元格的同时会改变worksheet.merged_cells
-        logging.info("检测到{}_{}中合并单元格如下：".format(self.filename, self.sheetname))
+        logging.info("检测到合并单元格如下：")
         logging.info(merged_list)
 
         # 拆分合并的单元格 并填充内容
@@ -44,7 +45,10 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     filename = input('请输入excel文件名.后缀名: \n')
     sheetname = input("请输入工作表名：\n")
-    unmerge_tool = UnmergeTool(filename, sheetname)
-    new_workbook = unmerge_tool.excute()
-    new_workbook.save(filename.replace('.xlsx', "_" + sheetname + '_unmerged.xlsx'))
-    logging.info("解除合并单元格成功！")
+    if ExistUtil.check_exists(filename, sheetname):
+        file_loader = FileLoader(filename, sheetname)
+        workbook, worksheet = file_loader.load_file()
+        unmerge_tool = UnmergeTool(workbook, worksheet)
+        new_workbook, worksheet = unmerge_tool.excute()
+        new_workbook.save(filename.replace('.xlsx', "_" + sheetname + '_unmerged.xlsx'))
+        logging.info("解除合并单元格成功！")
