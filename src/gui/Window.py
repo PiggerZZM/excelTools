@@ -1,6 +1,7 @@
-from PySide2 import QtCore
 from PySide2.QtCore import Slot
+from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QApplication, QAction, QMainWindow
+from PySide2.QtCore import Qt
 
 
 class MainWindow(QMainWindow):
@@ -9,6 +10,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.widget = widget
         self.setWindowTitle("Excel Tools")
+        self.setWindowIcon(QIcon("./gui/ZZM.jpg"))
 
         # 菜单按钮
         self.menu = self.menuBar()
@@ -30,7 +32,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.widget)  # 将widget居中放置到窗体
 
         # 禁止最大化和拉伸窗口大小
-        self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint)
+        self.setWindowFlag(Qt.WindowMaximizeButtonHint)
         self.setFixedSize(self.width(), self.height())
 
     @Slot()

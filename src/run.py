@@ -2,14 +2,14 @@ import logging
 import sys
 
 from PySide2.QtWidgets import QApplication
-
 from src.gui.SuccessWindow import SuccessWindow
 from src.gui.TransformDialog1 import TransformDialog1
 from src.gui.TransformDialog2 import TransformDialog2
-from src.gui.excel_tools_gui import Widget, MainWindow
+from src.gui.Widget import Widget
+from src.gui.Window import MainWindow
 
 if __name__ == '__main__':
-    
+
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
     app = QApplication()

@@ -1,7 +1,8 @@
 import logging
 
 from PySide2.QtCore import Slot
-from PySide2.QtWidgets import QDialog, QLineEdit, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QApplication
+from PySide2.QtWidgets import QDialog, QLineEdit, QLabel, QPushButton, QVBoxLayout, QHBoxLayout
+
 from src.transform_tools.transform_tool2 import TransformTool2
 from src.utils.exist_util import ExistUtil
 from src.utils.file_loader import FileLoader
@@ -39,17 +40,20 @@ class TransformDialog2(QDialog):
     @Slot()
     def button_clicked(self):
         filename = self.father_window.widget.file_path.text()
-        sheetname = self.father_window.widget.sheet_name.text()
+        sheetname = self.father_window.widget.sheet_name_box.currentText()
         if ExistUtil.check_exists(filename, sheetname):
             file_loader = FileLoader(filename, sheetname)
             workbook, worksheet = file_loader.load_file()
-            logging.info("读取Excel成功！")
+            logging.info("读取{}成功！".format(filename))
+            self.father_window.widget.show_text("读取{}成功！".format(filename))
             begin_row = int(self.row_begin.text())
             end_row = int(self.row_end.text())
 
             transformTool2 = TransformTool2(workbook, worksheet, begin_row, end_row)
             new_workbook = transformTool2.excute()
             new_workbook.save(filename.split('/')[-1].replace(".xlsx", "_" + sheetname + "(只合并上表头).xlsx"))
-            logging.info("转换成功！")
+            logging.info("转换上表头成功！")
+            self.father_window.widget.show_text("转换上表头成功！")
+            self.father_window.widget.show_text("--------------------")
             self.success_window.show()
         self.close()

@@ -1,15 +1,18 @@
-import xlrd
-import xlwt
+from openpyxl import Workbook
 
 
-def strip_util(workbook: xlrd.Workbook):
-    new_workbook = xlwt.Workbook()
-    sheet_names = workbook.sheet_names()
-    for sheet_name in sheet_names:
-        sheet = workbook[sheet_name]
-        new_sheet = new_workbook.add_sheet(sheet)
-        total_rows = sheet.nrows
-        total_cols = sheet.ncols
-        for row in total_rows:
-            for col in total_cols:
-                new_sheet.write(row, col, str(sheet.cell_value(row, col)).strip())
+class StripUtil:
+
+    @staticmethod
+    def strip(workbook: Workbook):
+        sheet_names = workbook.sheetnames
+        new_workbook = Workbook()
+        for sheet_name in sheet_names:
+            sheet = workbook[sheet_name]
+            new_sheet = new_workbook.create_sheet(sheet_name)
+            total_rows = sheet.max_row
+            total_cols = sheet.max_column
+            for row in range(1, total_rows + 1):
+                for col in range(1, total_cols + 1):
+                    new_sheet.cell(row, col, str(sheet.cell(row, col).value).strip())
+        return new_workbook
