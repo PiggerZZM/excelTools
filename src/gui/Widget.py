@@ -1,6 +1,6 @@
 import logging
 
-from PySide2.QtCore import QRect, Slot
+from PySide2.QtCore import QRect, Slot, Qt
 from PySide2.QtWidgets import QFileDialog, QHBoxLayout, QVBoxLayout, QLabel, QLineEdit, QPushButton, QTextEdit, QWidget, \
     QComboBox
 
@@ -29,6 +29,7 @@ class Widget(QWidget):
     4. 去除前后空格''')
         self.description.setGeometry(QRect(328, 240, 329, 27 * 4))
         self.description.setWordWrap(True)
+        self.description.setAlignment(Qt.AlignTop)
 
         # 右边的程序输出信息
         self.output_info = QTextEdit()

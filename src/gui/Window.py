@@ -10,7 +10,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.widget = widget
         self.setWindowTitle("Excel Tools")
-        self.setWindowIcon(QIcon("./gui/ZZM.jpg"))
+        self.setWindowIcon(QIcon("./gui/ZZM.ico"))
 
         # 菜单按钮
         self.menu = self.menuBar()
