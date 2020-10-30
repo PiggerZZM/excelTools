@@ -16,7 +16,6 @@ class TransformTool2:
         self.end_row = end_row
 
     def excute(self) -> Workbook:
-        logging.info("正在拆分合并单元格，请稍等……")
         unmerge_tool = UnmergeTool(self.workbook, self.worksheet)
         workbook, worksheet = unmerge_tool.excute()
 

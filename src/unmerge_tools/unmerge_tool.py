@@ -6,10 +6,6 @@ from openpyxl import Workbook
 from src.utils.exist_util import ExistUtil
 from src.utils.file_loader import FileLoader
 
-'''
-    在实例化前需要先判断excel文件以及工作表是否存在
-'''
-
 
 class UnmergeTool:
 
