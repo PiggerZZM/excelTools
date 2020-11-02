@@ -7,4 +7,6 @@
 /.idea/
 /src/transform_tools/__pycache__/
 /src/unmerge_tools/__pycache__/
+/src/dist/
+/src/build/
 *.spec
