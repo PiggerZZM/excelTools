@@ -9,13 +9,13 @@ class MainWindow(QMainWindow):
     def __init__(self, widget):
         super().__init__()
         self.widget = widget
-        self.setWindowTitle("Excel Tools")
+        self.resize(800, 600)
+        self.setWindowTitle("Excel表格处理工具合集")
         self.setWindowIcon(QIcon("./gui/ZZM.ico"))
 
         # 菜单按钮
         self.menu = self.menuBar()
         self.file_menu = self.menu.addMenu("文件")
-        self.about_menu = self.menu.addMenu("关于")
 
         # 添加退出选项
         exit_action = QAction("退出", self)  # 实例化Exit选项

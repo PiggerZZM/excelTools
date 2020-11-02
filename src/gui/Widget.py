@@ -49,7 +49,7 @@ class Widget(QWidget):
         # 左下的工具按钮
         self.unmerge_tool_button = QPushButton("解除合并单元格")
         self.unmerge_tool_button.clicked.connect(self.unmerge)
-        self.transform_tool1_button = QPushButton("转置")
+        self.transform_tool1_button = QPushButton("行列转置")
         self.transform_tool2_button = QPushButton("只处理上表头")
         self.strip_button = QPushButton("去除空格")
         self.strip_button.clicked.connect(self.strip)

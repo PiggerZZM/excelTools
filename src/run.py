@@ -17,12 +17,11 @@ if __name__ == '__main__':
     success_window = SuccessWindow()
     widget = Widget(success_window)
     window = MainWindow(widget)
-    window.resize(800, 600)
-
     transform_dialog1 = TransformDialog1(window, success_window)
     widget.transform_tool1_button.clicked.connect(transform_dialog1.show)
     transform_dialog2 = TransformDialog2(window, success_window)
     widget.transform_tool2_button.clicked.connect(transform_dialog2.show)
+
     window.show()
 
     sys.exit(app.exec_())

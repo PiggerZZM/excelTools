@@ -1,6 +1,7 @@
 import logging
 
 from PySide2.QtCore import Slot
+from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QDialog, QLineEdit, QLabel, QPushButton, QVBoxLayout, QHBoxLayout
 
 from src.transform_tools.transform_tool2 import TransformTool2
@@ -12,7 +13,8 @@ class TransformDialog2(QDialog):
 
     def __init__(self, father_window, success_window):
         super().__init__()
-        self.setWindowTitle("转换工具2")
+        self.setWindowIcon(QIcon("./gui/ZZM.ico"))
+        self.setWindowTitle("转换上表头")
         self.father_window = father_window
         self.success_window = success_window
 
