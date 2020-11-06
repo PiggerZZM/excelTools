@@ -4,7 +4,7 @@ from openpyxl import Workbook
 class StripUtil:
 
     @staticmethod
-    def strip(workbook: Workbook):
+    def strip(workbook: Workbook, letter=' '):
         sheet_names = workbook.sheetnames
         new_workbook = Workbook()
         for sheet_name in sheet_names:
@@ -14,5 +14,5 @@ class StripUtil:
             total_cols = sheet.max_column
             for row in range(1, total_rows + 1):
                 for col in range(1, total_cols + 1):
-                    new_sheet.cell(row, col, str(sheet.cell(row, col).value).strip())
+                    new_sheet.cell(row, col, str(sheet.cell(row, col).value).strip(letter))
         return new_workbook

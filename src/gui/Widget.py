@@ -26,7 +26,7 @@ class Widget(QWidget):
     1. 解除合并单元格并填充
     2. 中式表头表格转换(转置)
     3. 中式表头表格转换(只处理上表头)
-    4. 去除前后空格''')
+    4. 去除前后特定字符''')
         self.description.setGeometry(QRect(328, 240, 329, 27 * 4))
         self.description.setWordWrap(True)
         self.description.setAlignment(Qt.AlignTop)
@@ -51,8 +51,7 @@ class Widget(QWidget):
         self.unmerge_tool_button.clicked.connect(self.unmerge)
         self.transform_tool1_button = QPushButton("行列转置")
         self.transform_tool2_button = QPushButton("只处理上表头")
-        self.strip_button = QPushButton("去除空格")
-        self.strip_button.clicked.connect(self.strip)
+        self.strip_button = QPushButton("去除前后特定字符")
 
         # 布局
         self.layout = QHBoxLayout()
@@ -109,22 +108,6 @@ class Widget(QWidget):
             new_workbook.save(filename.split('/')[-1].replace(".xlsx", "_" + sheetname + "_unmerged.xlsx"))
             logging.info("解除合并单元格成功！")
             self.show_text("解除合并单元格成功！")
-            self.show_text("--------------------")
-            self.success_window.show()
-
-    @Slot()
-    def strip(self):
-        filename = self.file_path.text()
-        sheetname = self.sheet_name_box.currentText()
-        if ExistUtil.check_exists(filename, sheetname):
-            file_loader = FileLoader(filename, sheetname)
-            workbook, _ = file_loader.load_file()
-            logging.info("读取{}成功！".format(filename))
-            self.show_text("读取{}成功！".format(filename))
-            new_workbook = StripUtil.strip(workbook)
-            new_workbook.save(filename.split('/')[-1].replace(".xlsx", "_" + sheetname + "_stripped.xlsx"))
-            logging.info("去除空格成功！")
-            self.show_text("去除空格成功！")
             self.show_text("--------------------")
             self.success_window.show()
 
