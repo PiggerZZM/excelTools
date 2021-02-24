@@ -14,5 +14,7 @@ class StripUtil:
             total_cols = sheet.max_column
             for row in range(1, total_rows + 1):
                 for col in range(1, total_cols + 1):
-                    new_sheet.cell(row, col, str(sheet.cell(row, col).value).strip(letter))
+                    temp = sheet.cell(row, col).value
+                    if temp is not None:
+                        new_sheet.cell(row, col, str(temp).strip(letter))
         return new_workbook

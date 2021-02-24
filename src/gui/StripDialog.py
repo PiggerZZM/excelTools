@@ -14,7 +14,7 @@ class StripDialog(QDialog):
     def __init__(self, father_window, success_window):
         super().__init__()
         self.setWindowIcon(QIcon("./gui/ZZM.ico"))
-        self.setWindowTitle("转换上表头")
+        self.setWindowTitle("去除字符")
         self.father_window = father_window
         self.success_window = success_window
 

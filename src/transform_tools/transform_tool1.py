@@ -48,17 +48,22 @@ class TransformTool1:
         count = 0
         for row in range(self.data_row_begin, self.data_row_end + 1):
             for col in range(self.data_col_begin, self.data_col_end + 1):
-                data = str(worksheet.cell(row, col).value).strip()
-                count += 1
-                for top in range(1, self.data_row_begin):
-                    new_sheet.cell(new_row, top, worksheet.cell(top, col).value.strip())
-                for left in range(1, self.data_col_begin):
-                    new_sheet.cell(new_row, left + top_attrs, worksheet.cell(row, left).value.strip())
+                if worksheet.cell(row, col).value is not None:
+                    data = str(worksheet.cell(row, col).value).strip()
+                    count += 1
+                    for top in range(1, self.data_row_begin):
+                        temp = worksheet.cell(top, col).value
+                        if temp is not None:
+                            new_sheet.cell(new_row, top, str(temp).strip())
+                    for left in range(1, self.data_col_begin):
+                        temp = worksheet.cell(row, left).value
+                        if temp is not None:
+                            new_sheet.cell(new_row, left + top_attrs, str(temp).strip())
 
-                # 写入数值
-                new_sheet.cell(new_row, top_attrs + left_attrs + 1, data)
-                logging.info("数据[{}, {}]写入成功".format(row, col))
-                new_row += 1
+                    # 写入数值
+                    new_sheet.cell(new_row, top_attrs + left_attrs + 1, data)
+                    logging.info("数据[{}, {}]写入成功".format(row, col))
+                    new_row += 1
 
         logging.info("数据集有效数据个数：{}".format(count))
 
