@@ -71,4 +71,4 @@ Mac OS下输出文件位置在`home`目录
 - 去除空格输出文件名为`原文件名_工作表名_stripped.xlsx`
 
 ## To-Do-List
-Done~
+- 用Qt Designer重绘窗体并重构代码，分离UI代码与业务逻辑代码

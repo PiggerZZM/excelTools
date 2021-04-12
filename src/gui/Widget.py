@@ -8,11 +8,12 @@ from src.unmerge_tools.unmerge_tool import UnmergeTool
 from src.utils.exist_util import ExistUtil
 from src.utils.file_loader import FileLoader
 from src.utils.show_sheetnames import show_sheetnames
-from src.utils.strip_util import StripUtil
 
 
 class Widget(QWidget):
-
+    """
+    主窗口内的控件
+    """
     def __init__(self, success_window):
         super().__init__()
         self.success_window = success_window
@@ -31,7 +32,7 @@ class Widget(QWidget):
         self.description.setWordWrap(True)
         self.description.setAlignment(Qt.AlignTop)
 
-        # 右边的程序输出信息
+        # 右边的程序输出信息框
         self.output_info = QTextEdit()
         self.output_info.setReadOnly(True)
 

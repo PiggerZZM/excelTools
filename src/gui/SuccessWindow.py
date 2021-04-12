@@ -4,7 +4,9 @@ from PySide2.QtWidgets import QDialog, QPushButton, QLabel, QVBoxLayout
 
 
 class SuccessWindow(QDialog):
-
+    """
+    操作成功提示窗口：包含转换成功字样和一个确认按钮
+    """
     def __init__(self):
         super().__init__()
         self.setWindowIcon(QIcon("./gui/ZZM.ico"))

@@ -10,7 +10,9 @@ from src.utils.file_loader import FileLoader
 
 
 class TransformDialog1(QDialog):
-
+    """
+    "行列转置"功能窗口
+    """
     def __init__(self, father_window, success_window):
         super().__init__()
         self.setWindowIcon(QIcon("./gui/ZZM.ico"))
