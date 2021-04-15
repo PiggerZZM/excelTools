@@ -4,7 +4,7 @@ from copy import deepcopy
 from openpyxl import Workbook
 
 from src.utils.exist_util import ExistUtil
-from src.utils.file_loader import FileLoader
+from src.utils.excel_loader import ExcelLoader
 
 
 class UnmergeTool:
@@ -42,8 +42,8 @@ if __name__ == "__main__":
     filename = input('请输入excel文件名.后缀名: \n')
     sheetname = input("请输入工作表名：\n")
     if ExistUtil.check_exists(filename, sheetname):
-        file_loader = FileLoader(filename, sheetname)
-        workbook, worksheet = file_loader.load_file()
+        excel_loader = ExcelLoader(filename, sheetname)
+        workbook, worksheet = excel_loader.load_excel()
         unmerge_tool = UnmergeTool(workbook, worksheet)
         new_workbook, worksheet = unmerge_tool.excute()
         new_workbook.save(filename.replace('.xlsx', "_" + sheetname + '_unmerged.xlsx'))

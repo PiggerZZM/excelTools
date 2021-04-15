@@ -6,7 +6,7 @@ from PySide2.QtWidgets import QFileDialog, QHBoxLayout, QVBoxLayout, QLabel, QLi
 
 from src.unmerge_tools.unmerge_tool import UnmergeTool
 from src.utils.exist_util import ExistUtil
-from src.utils.file_loader import FileLoader
+from src.utils.excel_loader import ExcelLoader
 from src.utils.show_sheetnames import show_sheetnames
 
 
@@ -27,7 +27,8 @@ class Widget(QWidget):
     1. 解除合并单元格并填充
     2. 中式表头表格转换(转置)
     3. 中式表头表格转换(只处理上表头)
-    4. 去除前后特定字符''')
+    4. 去除前后特定字符
+    5. 基于SHA256的文件加密''')
         self.description.setGeometry(QRect(328, 240, 329, 27 * 4))
         self.description.setWordWrap(True)
         self.description.setAlignment(Qt.AlignTop)
@@ -53,6 +54,7 @@ class Widget(QWidget):
         self.transform_tool1_button = QPushButton("行列转置")
         self.transform_tool2_button = QPushButton("只处理上表头")
         self.strip_button = QPushButton("去除前后特定字符")
+        self.encrypt_button = QPushButton("文件加密解密")
 
         # 布局
         self.layout = QHBoxLayout()
@@ -66,6 +68,7 @@ class Widget(QWidget):
         self.button_layout.addWidget(self.transform_tool1_button)
         self.button_layout.addWidget(self.transform_tool2_button)
         self.button_layout.addWidget(self.strip_button)
+        self.button_layout.addWidget(self.encrypt_button)
         self.file_path_layout.addWidget(self.file_path_text)
         self.file_path_layout.addWidget(self.file_path)
         self.file_path_layout.addWidget(self.file_path_button)
@@ -83,25 +86,30 @@ class Widget(QWidget):
 
     @Slot()
     def open_file(self):
-        excel_file, _ = QFileDialog.getOpenFileName(self, 'Open file', '.', 'Excel files (*.xlsx)')
+        excel_file, _ = QFileDialog.getOpenFileName(self, 'Open file', '.', 'All Files (*)')
         if excel_file != "":
             logging.info("打开" + excel_file)
-            self.sheetnames = show_sheetnames(excel_file)
-            self.sheet_name_box.clear()
-            self.sheet_name_box.addItems(self.sheetnames)
             self.file_path.setText(excel_file)
-            output = "{}\n工作表名称：\n".format(excel_file)
-            for sheetname in self.sheetnames:
-                output += sheetname + "\n"
-            self.show_text(output)
+            file_type = excel_file.split('.')[-1]
+            self.sheet_name_box.clear()
+            if file_type == 'xlsx':
+                self.sheetnames = show_sheetnames(excel_file)
+                self.sheet_name_box.addItems(self.sheetnames)
+                output = "打开{}\n工作表名称：\n".format(excel_file)
+                for sheetname in self.sheetnames:
+                    output += sheetname + "\n"
+                self.show_text(output)
+            else:
+                output = "打开" + excel_file + '\n'
+                self.show_text(output)
 
     @Slot()
     def unmerge(self):
         filename = self.file_path.text()
         sheetname = self.sheet_name_box.currentText()
         if ExistUtil.check_exists(filename, sheetname):
-            file_loader = FileLoader(filename, sheetname)
-            workbook, worksheet = file_loader.load_file()
+            excel_loader = ExcelLoader(filename, sheetname)
+            workbook, worksheet = excel_loader.load_excel()
             logging.info("读取{}成功！".format(filename))
             self.show_text("读取{}成功！".format(filename))
             unmerge_tool = UnmergeTool(workbook, worksheet)

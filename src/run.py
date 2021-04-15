@@ -3,6 +3,7 @@ import sys
 
 from PySide2.QtWidgets import QApplication
 
+from src.gui.EncryptDialog import EncryptDialog
 from src.gui.StripDialog import StripDialog
 from src.gui.SuccessWindow import SuccessWindow
 from src.gui.TransformDialog1 import TransformDialog1
@@ -18,6 +19,8 @@ if __name__ == '__main__':
 
     # 实例化操作成功提示窗口
     success_window = SuccessWindow()
+
+    # 实例化所有控件
     widget = Widget(success_window)
 
     # 实例化主窗口
@@ -34,6 +37,10 @@ if __name__ == '__main__':
     # 实例化"去除字符"功能窗口
     strip_dialog = StripDialog(window, success_window)
     widget.strip_button.clicked.connect(strip_dialog.show)
+
+    # 实例化"加密文件"功能窗口
+    encrypt_dialog = EncryptDialog(window, success_window)
+    widget.encrypt_button.clicked.connect(encrypt_dialog.show)
 
     # 显示主窗口
     window.show()

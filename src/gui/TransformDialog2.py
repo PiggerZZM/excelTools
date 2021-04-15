@@ -6,7 +6,7 @@ from PySide2.QtWidgets import QDialog, QLineEdit, QLabel, QPushButton, QVBoxLayo
 
 from src.transform_tools.transform_tool2 import TransformTool2
 from src.utils.exist_util import ExistUtil
-from src.utils.file_loader import FileLoader
+from src.utils.excel_loader import ExcelLoader
 
 
 class TransformDialog2(QDialog):
@@ -44,8 +44,8 @@ class TransformDialog2(QDialog):
         filename = self.father_window.widget.file_path.text()
         sheetname = self.father_window.widget.sheet_name_box.currentText()
         if ExistUtil.check_exists(filename, sheetname):
-            file_loader = FileLoader(filename, sheetname)
-            workbook, worksheet = file_loader.load_file()
+            excel_loader = ExcelLoader(filename, sheetname)
+            workbook, worksheet = excel_loader.load_excel()
             logging.info("读取{}成功！".format(filename))
             self.father_window.widget.show_text("读取{}成功！".format(filename))
             begin_row = int(self.row_begin.text())

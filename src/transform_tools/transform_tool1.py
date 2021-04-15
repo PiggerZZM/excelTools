@@ -4,7 +4,7 @@ from openpyxl import Workbook
 
 from src.unmerge_tools.unmerge_tool import UnmergeTool
 from src.utils.exist_util import ExistUtil
-from src.utils.file_loader import FileLoader
+from src.utils.excel_loader import ExcelLoader
 
 
 def str_to_int(chs: str) -> int:
@@ -87,8 +87,8 @@ if __name__ == "__main__":
     data_col_begin = str_to_int(input('数据集起始列号(英文字母或数字)：\n'))
     data_col_end = str_to_int(input('数据集结束列号(英文字母或数字)：\n'))
     if ExistUtil.check_exists(filename, sheetname):
-        file_loader = FileLoader(filename, sheetname)
-        workbook, worksheet = file_loader.load_file()
+        excel_loader = ExcelLoader(filename, sheetname)
+        workbook, worksheet = excel_loader.load_excel()
         transformTool1 = TransformTool1(workbook, worksheet, data_row_begin, data_row_end, data_col_begin,
                                         data_col_end)
         new_workbook = transformTool1.excete()

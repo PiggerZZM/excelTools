@@ -4,7 +4,7 @@ from src.unmerge_tools.unmerge_tool import UnmergeTool
 from openpyxl import Workbook
 
 from src.utils.exist_util import ExistUtil
-from src.utils.file_loader import FileLoader
+from src.utils.excel_loader import ExcelLoader
 
 
 class TransformTool2:
@@ -41,8 +41,8 @@ if __name__ == '__main__':
     end_row = int(input("输入表头结束行："))
 
     if ExistUtil.check_exists(filename, sheetname):
-        file_loader = FileLoader(filename, sheetname)
-        workbook, worksheet = file_loader.load_file()
+        excel_loader = ExcelLoader(filename, sheetname)
+        workbook, worksheet = excel_loader.load_excel()
         transformTool2 = TransformTool2(workbook, worksheet, begin_row, end_row)
         new_workbook = transformTool2.excute()
         new_workbook.save(filename.replace(".xlsx", "_" + sheetname + "转换2.xlsx"))

@@ -1,13 +1,13 @@
 from openpyxl import load_workbook
 
 
-class FileLoader:
+class ExcelLoader:
 
     def __init__(self, filename, sheetname):
         self.filename = filename
         self.sheetname = sheetname
 
-    def load_file(self):
+    def load_excel(self):
         workbook = load_workbook(self.filename)
         worksheet = workbook[self.sheetname]
         return workbook, worksheet

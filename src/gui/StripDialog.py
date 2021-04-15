@@ -5,7 +5,7 @@ from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QDialog, QLineEdit, QLabel, QPushButton, QVBoxLayout, QHBoxLayout
 
 from src.utils.exist_util import ExistUtil
-from src.utils.file_loader import FileLoader
+from src.utils.excel_loader import ExcelLoader
 from src.utils.strip_util import StripUtil
 
 
@@ -38,8 +38,8 @@ class StripDialog(QDialog):
         filename = self.father_window.widget.file_path.text()
         sheetname = self.father_window.widget.sheet_name_box.currentText()
         if ExistUtil.check_exists(filename, sheetname):
-            file_loader = FileLoader(filename, sheetname)
-            workbook, _ = file_loader.load_file()
+            excel_loader = ExcelLoader(filename, sheetname)
+            workbook, _ = excel_loader.load_excel()
             logging.info("读取{}成功！".format(filename))
             self.father_window.widget.show_text("读取{}成功！".format(filename))
             letter = self.strip_ch.text()
