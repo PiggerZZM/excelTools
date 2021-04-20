@@ -5,7 +5,7 @@ from PySide2.QtWidgets import QApplication
 
 from src.gui.EncryptDialog import EncryptDialog
 from src.gui.StripDialog import StripDialog
-from src.gui.SuccessWindow import SuccessWindow
+from src.gui.SuccessDialog import SuccessWindow
 from src.gui.TransformDialog1 import TransformDialog1
 from src.gui.TransformDialog2 import TransformDialog2
 from src.gui.Widget import Widget

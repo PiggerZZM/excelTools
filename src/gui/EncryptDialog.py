@@ -5,7 +5,7 @@ from PySide2.QtCore import Slot
 from PySide2.QtWidgets import QDialog
 from PySide2.QtGui import QIcon
 
-from src.gui.Ui_EncryptDialog import Ui_EncryptDialog
+from src.gui.UI.Ui_EncryptDialog import Ui_EncryptDialog
 from src.utils.encryptor import Encryptor
 
 
