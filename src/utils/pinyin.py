@@ -9,3 +9,8 @@ def str_to_pinyin(string):  # 输入中文字符串，返回每个字的拼音�
 
     return_str = return_str.upper()
     return return_str
+
+
+if __name__ == '__main__':
+    test = '123_哈哈test+-*/!@#$%^&*() ###'
+    print(str_to_pinyin(test))

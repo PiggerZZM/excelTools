@@ -4,6 +4,7 @@ from PySide2.QtCore import QRect, Slot, Qt
 from PySide2.QtWidgets import QFileDialog, QHBoxLayout, QVBoxLayout, QLabel, QLineEdit, QPushButton, QTextEdit, QWidget, \
     QComboBox
 
+from src.transform_tools.transform_tool3 import TransformTool3
 from src.unmerge_tools.unmerge_tool import UnmergeTool
 from src.utils.exist_util import ExistUtil
 from src.utils.excel_loader import ExcelLoader
@@ -28,7 +29,8 @@ class Widget(QWidget):
     2. 中式表头表格转换(转置)
     3. 中式表头表格转换(只处理上表头)
     4. 去除前后特定字符
-    5. 基于SHA256的文件加密''')
+    5. 基于SHA256的文件加密
+    6. 表头转拼音首字母''')
         self.description.setGeometry(QRect(328, 240, 329, 27 * 4))
         self.description.setWordWrap(True)
         self.description.setAlignment(Qt.AlignTop)
@@ -55,20 +57,24 @@ class Widget(QWidget):
         self.transform_tool2_button = QPushButton("只处理上表头")
         self.strip_button = QPushButton("去除前后特定字符")
         self.encrypt_button = QPushButton("文件加密解密")
+        self.pinyin_button = QPushButton("表头转拼音")
+        self.pinyin_button.clicked.connect(self.pinyin)
 
         # 布局
         self.layout = QHBoxLayout()
         self.file_path_layout = QHBoxLayout()
-        self.button_layout = QHBoxLayout()
+        self.button_layout1 = QHBoxLayout()
+        self.button_layout2 = QHBoxLayout()
         self.left_layout = QVBoxLayout()
         self.sheet_name_layout = QHBoxLayout()
 
         # 将工具加入到布局
-        self.button_layout.addWidget(self.unmerge_tool_button)
-        self.button_layout.addWidget(self.transform_tool1_button)
-        self.button_layout.addWidget(self.transform_tool2_button)
-        self.button_layout.addWidget(self.strip_button)
-        self.button_layout.addWidget(self.encrypt_button)
+        self.button_layout1.addWidget(self.unmerge_tool_button)
+        self.button_layout1.addWidget(self.transform_tool1_button)
+        self.button_layout1.addWidget(self.transform_tool2_button)
+        self.button_layout2.addWidget(self.strip_button)
+        self.button_layout2.addWidget(self.encrypt_button)
+        self.button_layout2.addWidget(self.pinyin_button)
         self.file_path_layout.addWidget(self.file_path_text)
         self.file_path_layout.addWidget(self.file_path)
         self.file_path_layout.addWidget(self.file_path_button)
@@ -77,7 +83,8 @@ class Widget(QWidget):
         self.left_layout.addWidget(self.description)
         self.left_layout.addLayout(self.file_path_layout)
         self.left_layout.addLayout(self.sheet_name_layout)
-        self.left_layout.addLayout(self.button_layout)
+        self.left_layout.addLayout(self.button_layout1)
+        self.left_layout.addLayout(self.button_layout2)
         self.layout.addLayout(self.left_layout)
         self.layout.addWidget(self.output_info)
 
@@ -117,6 +124,23 @@ class Widget(QWidget):
             new_workbook.save(filename.split('/')[-1].replace(".xlsx", "_" + sheetname + "_unmerged.xlsx"))
             logging.info("解除合并单元格成功！")
             self.show_text("解除合并单元格成功！")
+            self.show_text("--------------------")
+            self.success_window.show()
+
+    @Slot()
+    def pinyin(self):
+        filename = self.file_path.text()
+        sheetname = self.sheet_name_box.currentText()
+        if ExistUtil.check_exists(filename, sheetname):
+            excel_loader = ExcelLoader(filename, sheetname)
+            workbook, worksheet = excel_loader.load_excel()
+            logging.info("读取{}成功！".format(filename))
+            self.show_text("读取{}成功！".format(filename))
+            transformTool3 = TransformTool3(workbook, worksheet)
+            new_workbook = transformTool3.excute()
+            new_workbook.save(filename.split('/')[-1].replace(".xlsx", "_" + sheetname + "(表头转拼音).xlsx"))
+            logging.info("表头转拼音成功！")
+            self.show_text("表头转拼音成功！")
             self.show_text("--------------------")
             self.success_window.show()
 
