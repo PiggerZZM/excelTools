@@ -2,7 +2,7 @@ import logging
 
 from PySide2.QtCore import Slot
 from PySide2.QtGui import QIcon
-from PySide2.QtWidgets import QDialog, QLineEdit, QLabel, QPushButton, QVBoxLayout, QHBoxLayout
+from PySide2.QtWidgets import QDialog
 
 from src.gui.UI.Ui_StripDialog import Ui_StripDialog
 from src.utils.exist_util import ExistUtil

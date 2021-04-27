@@ -2,7 +2,7 @@ import logging
 
 from PySide2.QtCore import Slot
 from PySide2.QtGui import QIcon
-from PySide2.QtWidgets import QDialog, QLineEdit, QLabel, QPushButton, QVBoxLayout, QHBoxLayout
+from PySide2.QtWidgets import QDialog
 
 from src.gui.UI.Ui_TransformDialog1 import Ui_TransformDialog1
 from src.transform_tools.transform_tool1 import str_to_int, TransformTool1
