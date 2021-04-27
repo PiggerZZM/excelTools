@@ -2,8 +2,9 @@ import logging
 
 from PySide2.QtCore import Slot
 from PySide2.QtGui import QIcon
-from PySide2.QtWidgets import QDialog, QLineEdit, QLabel, QPushButton, QVBoxLayout, QHBoxLayout
+from PySide2.QtWidgets import QDialog
 
+from src.gui.UI.Ui_TransformDialog2 import Ui_TransformDialog2
 from src.transform_tools.transform_tool2 import TransformTool2
 from src.utils.exist_util import ExistUtil
 from src.utils.excel_loader import ExcelLoader
@@ -14,33 +15,15 @@ class TransformDialog2(QDialog):
     def __init__(self, father_window, success_window):
         super().__init__()
         self.setWindowIcon(QIcon("./gui/ZZM.ico"))
-        self.setWindowTitle("转换上表头")
         self.father_window = father_window
         self.success_window = success_window
 
-        self.row_begin = QLineEdit()
-        self.row_end = QLineEdit()
-        self.row_begin_text = QLabel("表头起始行号：")
-        self.row_end_text = QLabel("表头结束行号：")
-
-        self.button = QPushButton("确认")
-        self.button.clicked.connect(self.button_clicked)
-
-        # 布局
-        layout = QVBoxLayout()
-        up_layout = QHBoxLayout()
-        down_layout = QHBoxLayout()
-        up_layout.addWidget(self.row_begin_text)
-        up_layout.addWidget(self.row_begin)
-        down_layout.addWidget(self.row_end_text)
-        down_layout.addWidget(self.row_end)
-        layout.addLayout(up_layout)
-        layout.addLayout(down_layout)
-        layout.addWidget(self.button)
-        self.setLayout(layout)
+        # 应用UI
+        self.ui = Ui_TransformDialog2()
+        self.ui.setupUi(self)
 
     @Slot()
-    def button_clicked(self):
+    def on_okButton_clicked(self):
         filename = self.father_window.widget.file_path.text()
         sheetname = self.father_window.widget.sheet_name_box.currentText()
         if ExistUtil.check_exists(filename, sheetname):
@@ -48,8 +31,8 @@ class TransformDialog2(QDialog):
             workbook, worksheet = excel_loader.load_excel()
             logging.info("读取{}成功！".format(filename))
             self.father_window.widget.show_text("读取{}成功！".format(filename))
-            begin_row = int(self.row_begin.text())
-            end_row = int(self.row_end.text())
+            begin_row = int(self.ui.rowBegin.text())
+            end_row = int(self.ui.rowEnd.text())
 
             transformTool2 = TransformTool2(workbook, worksheet, begin_row, end_row)
             new_workbook = transformTool2.excute()
