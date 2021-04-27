@@ -35,7 +35,7 @@ class EncryptDialog(QDialog):
                 logging.info("获取密码成功")
                 message_encrypt = Encryptor.encrypt(message, password)
                 logging.info("加密成功")
-                filename_encrypt = filename.replace('.xlsx', '.encrypt')
+                filename_encrypt = filename.replace(filename.split('.')[-1], 'encrypt')
                 file_encrypt = open(filename_encrypt, 'wb')
                 file_encrypt.write(message_encrypt)
                 file_encrypt.close()
