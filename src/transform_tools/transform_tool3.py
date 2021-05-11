@@ -1,7 +1,5 @@
 import logging
 
-from openpyxl import Workbook
-
 from src.utils.excel_loader import ExcelLoader
 from src.utils.exist_util import ExistUtil
 from src.utils.pinyin import str_to_pinyin
@@ -9,17 +7,14 @@ from src.utils.pinyin import str_to_pinyin
 
 class TransformTool3:
 
-    def __init__(self, workbook: Workbook, worksheet):
-        self.workbook = workbook
+    def __init__(self, worksheet):
         self.worksheet = worksheet
 
-    def excute(self) -> Workbook:
+    def excute(self):
         max_column = self.worksheet.max_column  # 最大列数
         for col in range(1, max_column+1):
             pinyin = str_to_pinyin(str(self.worksheet.cell(1, col).value))
             self.worksheet.cell(1, col).value = pinyin
-
-        return self.workbook
 
 
 if __name__ == '__main__':
@@ -31,7 +26,7 @@ if __name__ == '__main__':
     if ExistUtil.check_exists(filename, sheetname):
         excel_loader = ExcelLoader(filename, sheetname)
         workbook, worksheet = excel_loader.load_excel()
-        transformTool3 = TransformTool3(workbook, worksheet)
-        new_workbook = transformTool3.excute()
-        new_workbook.save(filename.replace(".xlsx", "_" + sheetname + "转换3.xlsx"))
+        transformTool3 = TransformTool3(worksheet)
+        transformTool3.excute()
+        workbook.save(filename.replace(".xlsx", "_" + sheetname + "转换3.xlsx"))
         logging.info("转换成功！")

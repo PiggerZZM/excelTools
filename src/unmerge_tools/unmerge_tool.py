@@ -1,24 +1,20 @@
 import logging
 from copy import deepcopy
 
-from openpyxl import Workbook
-
 from src.utils.exist_util import ExistUtil
 from src.utils.excel_loader import ExcelLoader
 
 
 class UnmergeTool:
 
-    def __init__(self, workbook: Workbook, worksheet):
-        self.workbook = workbook
+    def __init__(self, worksheet):
         self.worksheet = worksheet
 
     def excute(self):
         logging.info("正在拆分合并单元格，请稍等……")
-        self.unmerge()
-        return self.workbook, self.worksheet
+        self.__unmerge()
 
-    def unmerge(self):
+    def __unmerge(self):
         # 获取所有 合并单元格的 位置信息
         # 是个可迭代对象，单个对象类型：openpyxl.worksheet.cell_range.MultiCellRange
         merged_list = deepcopy(self.worksheet.merged_cells)  # 深拷贝，进行拆分单元格的同时会改变worksheet.merged_cells
@@ -44,7 +40,6 @@ if __name__ == "__main__":
     if ExistUtil.check_exists(filename, sheetname):
         excel_loader = ExcelLoader(filename, sheetname)
         workbook, worksheet = excel_loader.load_excel()
-        unmerge_tool = UnmergeTool(workbook, worksheet)
-        new_workbook, worksheet = unmerge_tool.excute()
-        new_workbook.save(filename.replace('.xlsx', "_" + sheetname + '_unmerged.xlsx'))
+        unmerge_tool = UnmergeTool(worksheet)
+        workbook.save(filename.replace('.xlsx', "_" + sheetname + '_unmerged.xlsx'))
         logging.info("解除合并单元格成功！")

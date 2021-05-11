@@ -5,20 +5,7 @@ from openpyxl import Workbook
 from src.unmerge_tools.unmerge_tool import UnmergeTool
 from src.utils.exist_util import ExistUtil
 from src.utils.excel_loader import ExcelLoader
-
-
-def str_to_int(chs: str) -> int:
-    if chs[0].isdigit():
-        return int(chs)
-    else:
-        num = 0
-        for ch in chs:
-            num *= 26
-            if ord('A') <= ord(ch) <= ord('Z'):
-                num += ord(ch) - ord('A') + 1
-            elif ord('a') <= ord(ch) <= ord('z'):
-                num += ord(ch) - ord('a') + 1
-    return num
+from src.utils.str_to_int import str_to_int
 
 
 class TransformTool1:
@@ -32,7 +19,7 @@ class TransformTool1:
         self.data_col_begin = data_col_begin
         self.data_col_end = data_col_end
 
-    def read_and_write(self, worksheet) -> Workbook():
+    def __read_and_write(self, worksheet) -> Workbook():
         total_rows = worksheet.max_row
         total_cols = worksheet.max_column
         top_attrs = total_rows - self.data_row_end + self.data_row_begin - 1
@@ -69,10 +56,10 @@ class TransformTool1:
 
         return new_workbook
 
-    def excete(self) -> Workbook:
-        unmerge_tool = UnmergeTool(self.workbook, self.worksheet)
-        workbook, worksheet = unmerge_tool.excute()
-        new_workbook = self.read_and_write(worksheet)
+    def excute(self) -> Workbook:
+        unmerge_tool = UnmergeTool(self.worksheet)
+        unmerge_tool.excute()
+        new_workbook = self.__read_and_write(self.worksheet)
         return new_workbook
 
 
@@ -91,6 +78,6 @@ if __name__ == "__main__":
         workbook, worksheet = excel_loader.load_excel()
         transformTool1 = TransformTool1(workbook, worksheet, data_row_begin, data_row_end, data_col_begin,
                                         data_col_end)
-        new_workbook = transformTool1.excete()
+        new_workbook = transformTool1.excute()
         new_workbook.save(filename.replace(".xlsx", "_" + sheetname + "转换1.xlsx"))
         logging.info("转换成功！")

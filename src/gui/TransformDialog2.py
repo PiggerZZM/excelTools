@@ -34,9 +34,9 @@ class TransformDialog2(QDialog):
             begin_row = int(self.ui.rowBegin.text())
             end_row = int(self.ui.rowEnd.text())
 
-            transformTool2 = TransformTool2(workbook, worksheet, begin_row, end_row)
-            new_workbook = transformTool2.excute()
-            new_workbook.save(filename.split('/')[-1].replace(".xlsx", "_" + sheetname + "(只合并上表头).xlsx"))
+            transform_tool2 = TransformTool2(workbook, worksheet, begin_row, end_row)
+            transform_tool2.excute()
+            workbook.save(filename.split('/')[-1].replace(".xlsx", "_" + sheetname + "(只合并上表头).xlsx"))
             logging.info("转换上表头成功！")
             self.father_window.widget.show_text("转换上表头成功！")
             self.father_window.widget.show_text("--------------------")

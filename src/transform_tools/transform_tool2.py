@@ -15,21 +15,20 @@ class TransformTool2:
         self.begin_row = begin_row
         self.end_row = end_row
 
-    def excute(self) -> Workbook:
-        unmerge_tool = UnmergeTool(self.workbook, self.worksheet)
-        workbook, worksheet = unmerge_tool.excute()
+    def excute(self):
+        unmerge_tool = UnmergeTool(self.worksheet)
+        unmerge_tool.excute()
 
-        max_column = worksheet.max_column  # 最大列数
+        max_column = self.worksheet.max_column  # 最大列数
         previous = ""
         for col in range(1, max_column + 1):
             temp = ""
             for row in range(self.begin_row, self.end_row + 1):
-                if previous != str(worksheet.cell(row, col).value):
-                    previous = str(worksheet.cell(row, col).value)
+                if previous != str(self.worksheet.cell(row, col).value):
+                    previous = str(self.worksheet.cell(row, col).value)
                     temp += previous
-            worksheet.cell(self.end_row, col).value = temp
-        worksheet.delete_rows(1, self.end_row - self.begin_row)
-        return workbook
+            self.worksheet.cell(self.end_row, col).value = temp
+        self.worksheet.delete_rows(1, self.end_row - self.begin_row)
 
 
 if __name__ == '__main__':
@@ -44,6 +43,5 @@ if __name__ == '__main__':
         excel_loader = ExcelLoader(filename, sheetname)
         workbook, worksheet = excel_loader.load_excel()
         transformTool2 = TransformTool2(workbook, worksheet, begin_row, end_row)
-        new_workbook = transformTool2.excute()
-        new_workbook.save(filename.replace(".xlsx", "_" + sheetname + "转换2.xlsx"))
+        workbook.save(filename.replace(".xlsx", "_" + sheetname + "转换2.xlsx"))
         logging.info("转换成功！")
