@@ -18,10 +18,10 @@ if __name__ == '__main__':
 
     app = QApplication()
 
-    # 实例化操作成功提示窗口
+    # 实例化"操作成功"提示窗口
     success_window = SuccessWindow()
 
-    # 实例化所有控件
+    # 实例化主窗口所有控件
     widget = Widget(success_window)
 
     # 实例化主窗口

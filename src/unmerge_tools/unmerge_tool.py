@@ -6,7 +6,9 @@ from src.utils.excel_loader import ExcelLoader
 
 
 class UnmergeTool:
-
+    """
+    解除合并单元格
+    """
     def __init__(self, worksheet):
         self.worksheet = worksheet
 

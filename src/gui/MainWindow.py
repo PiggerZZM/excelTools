@@ -5,7 +5,9 @@ from PySide2.QtCore import Qt
 
 
 class MainWindow(QMainWindow):
-
+    """
+    主窗口
+    """
     def __init__(self, widget):
         super().__init__()
         self.widget = widget

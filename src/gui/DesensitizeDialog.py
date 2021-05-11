@@ -11,7 +11,9 @@ from src.utils.exist_util import ExistUtil
 
 
 class DesensitizeDialog(QDialog):
-
+    """
+    数据脱敏功能窗口
+    """
     def __init__(self, father_window, success_window):
         super().__init__()
         self.setWindowIcon(QIcon("./gui/ZZM.ico"))

@@ -11,7 +11,9 @@ from src.utils.excel_loader import ExcelLoader
 
 
 class TransformDialog2(QDialog):
-
+    """
+    "只转换表头"功能窗口
+    """
     def __init__(self, father_window, success_window):
         super().__init__()
         self.setWindowIcon(QIcon("./gui/ZZM.ico"))
