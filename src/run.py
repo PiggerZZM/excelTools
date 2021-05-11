@@ -3,6 +3,7 @@ import sys
 
 from PySide2.QtWidgets import QApplication
 
+from src.gui.DesensitizeDialog import DesensitizeDialog
 from src.gui.EncryptDialog import EncryptDialog
 from src.gui.StripDialog import StripDialog
 from src.gui.SuccessDialog import SuccessWindow
@@ -41,6 +42,10 @@ if __name__ == '__main__':
     # 实例化"加密文件"功能窗口
     encrypt_dialog = EncryptDialog(window, success_window)
     widget.encrypt_button.clicked.connect(encrypt_dialog.show)
+
+    # 实例化"数据脱敏"功能窗口
+    desensitizeDialog = DesensitizeDialog(window, success_window)
+    widget.desensitize_button.clicked.connect(desensitizeDialog.show)
 
     # 显示主窗口
     window.show()

@@ -30,7 +30,8 @@ class Widget(QWidget):
     3. 中式表头表格转换(只处理上表头)
     4. 去除前后特定字符
     5. 基于SHA256的文件加密
-    6. 表头转拼音首字母''')
+    6. 表头转拼音首字母
+    7. 数据脱敏''')
         self.description.setGeometry(QRect(328, 240, 329, 27 * 4))
         self.description.setWordWrap(True)
         self.description.setAlignment(Qt.AlignTop)
@@ -59,6 +60,7 @@ class Widget(QWidget):
         self.encrypt_button = QPushButton("文件加密解密")
         self.pinyin_button = QPushButton("表头转拼音")
         self.pinyin_button.clicked.connect(self.pinyin)
+        self.desensitize_button = QPushButton("数据脱敏")
 
         # 布局
         self.layout = QHBoxLayout()
@@ -75,6 +77,7 @@ class Widget(QWidget):
         self.button_layout2.addWidget(self.strip_button)
         self.button_layout2.addWidget(self.encrypt_button)
         self.button_layout2.addWidget(self.pinyin_button)
+        self.button_layout2.addWidget(self.desensitize_button)
         self.file_path_layout.addWidget(self.file_path_text)
         self.file_path_layout.addWidget(self.file_path)
         self.file_path_layout.addWidget(self.file_path_button)

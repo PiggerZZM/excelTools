@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>desensitizeDialog</class>
+ <widget class="QDialog" name="desensitizeDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>261</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>数据脱敏</string>
+  </property>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>49</x>
+     <y>9</y>
+     <width>271</width>
+     <height>194</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="choiceLabel">
+        <property name="text">
+         <string>选择脱敏类型</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="choiceBox">
+        <item>
+         <property name="text">
+          <string>数值</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>日期</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="columnLabel">
+        <property name="text">
+         <string>输入需要脱敏的列号(英文)：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="columnEdit"/>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="OKButton">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>210</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>确认</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
