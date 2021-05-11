@@ -23,4 +23,3 @@ class DesensitizeUtil:
             elif tp == '日期':  # 修改日期
                 random_date = datetime(row[coln].value.year, 1, 1)
                 worksheet[col + str(index)] = random_date
-        return worksheet
