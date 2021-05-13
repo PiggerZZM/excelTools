@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>261</height>
+    <width>515</width>
+    <height>299</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,47 +18,36 @@
     <rect>
      <x>49</x>
      <y>9</y>
-     <width>271</width>
-     <height>194</height>
+     <width>421</width>
+     <height>231</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QLabel" name="choiceLabel">
+       <widget class="QLabel" name="numColumnLabel">
         <property name="text">
-         <string>选择脱敏类型</string>
+         <string>数值类型列号(多个列用空格隔开)：</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="choiceBox">
-        <item>
-         <property name="text">
-          <string>数值</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>日期</string>
-         </property>
-        </item>
-       </widget>
+       <widget class="QLineEdit" name="numColumnEdit"/>
       </item>
      </layout>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QLabel" name="columnLabel">
+       <widget class="QLabel" name="dateColumnLabel">
         <property name="text">
-         <string>输入需要脱敏的列号(英文)：</string>
+         <string>日期类型列号(多个列用空格隔开)：</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="columnEdit"/>
+       <widget class="QLineEdit" name="dateColumnEdit"/>
       </item>
      </layout>
     </item>
@@ -67,8 +56,8 @@
   <widget class="QPushButton" name="OKButton">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>210</y>
+     <x>200</x>
+     <y>260</y>
      <width>93</width>
      <height>28</height>
     </rect>

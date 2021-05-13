@@ -2,7 +2,7 @@ from PySide2.QtCore import Slot
 from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QDialog
 
-from src.gui.UI.Ui_SuccessDialog import Ui_successDialog
+from src.gui.UI_file.Ui_SuccessDialog import Ui_successDialog
 
 
 class SuccessWindow(QDialog):

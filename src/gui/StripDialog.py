@@ -4,7 +4,7 @@ from PySide2.QtCore import Slot
 from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QDialog
 
-from src.gui.UI.Ui_StripDialog import Ui_StripDialog
+from src.gui.UI_file.Ui_StripDialog import Ui_StripDialog
 from src.utils.exist_util import ExistUtil
 from src.utils.excel_loader import ExcelLoader
 from src.utils.strip_util import StripUtil

@@ -2,12 +2,16 @@
 
 ## 版本信息(2021-2-24发布)
 
-- `Pyside2--5.15.1`
-- `Python--3.7.8`
-- `openpyxl--3.0.5`
-- `cryptography--3.4.7`
-- `pypinyin--0.41.0`
-- `pyinstaller--4.0`
+- `Pyside2==5.15.1`
+- `Python==3.7.8`
+- `openpyxl==3.0.5`
+- `cryptography==3.4.7`
+- `pypinyin==0.41.0`
+- `pyinstaller==4.0`
+
+```
+pip install Pyside2==5.15.1 openpyxl==3.0.5 cryptography==3.4.7 pypinyin==0.41.0 pyinstaller==4.0
+```
 
 ## 功能介绍
 1. 解除合并单元格并填充
@@ -16,6 +20,7 @@
 4. 去除多于字符
 5. 基于SHA-256的文件加密解密
 6. 表头转拼音大写首字母
+7. 数值类型和日期类型数据脱敏
 
 ## 使用说明
 
@@ -76,4 +81,3 @@ Mac OS下输出文件位置在`home`目录
 - 去除空格输出文件名为`原文件名_工作表名_stripped.xlsx`
 
 ## To-Do-List
-- 用Qt Designer重绘窗体并重构代码，分离UI代码与业务逻辑代码

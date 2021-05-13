@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'TransformDialog2.ui'
+## Form generated from reading UI_file file 'TransformDialog2.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.1
 ##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
+## WARNING! All changes made in this file will be lost when recompiling UI_file file!
 ################################################################################
 from PySide2.QtCore import QRect, QMetaObject, QCoreApplication
 from PySide2.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QWidget

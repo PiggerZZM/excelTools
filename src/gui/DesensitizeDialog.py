@@ -5,7 +5,7 @@ from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QDialog
 
 from src.utils.desensitize_util import DesensitizeUtil
-from src.gui.UI.Ui_DesensitizeDialog import Ui_desensitizeDialog
+from src.gui.UI_file.Ui_DesensitizeDialog import Ui_desensitizeDialog
 from src.utils.excel_loader import ExcelLoader
 from src.utils.exist_util import ExistUtil
 
@@ -33,7 +33,7 @@ class DesensitizeDialog(QDialog):
             workbook, worksheet = excel_loader.load_excel()
             logging.info("读取{}成功！".format(filename))
             self.father_window.widget.show_text("读取{}成功！".format(filename))
-            DesensitizeUtil.desensitive(worksheet, self.ui.columnEdit.text(), self.ui.choiceBox.currentText())
+            DesensitizeUtil.desensitive(worksheet, self.ui.numColumnEdit.text(), self.ui.dateColumnEdit.text())
             logging.info("数据脱敏成功！")
             self.father_window.widget.show_text("数据脱敏成功")
             filename_desensitize = filename.split('/')[-1].replace(".xlsx", "_" + sheetname + "(数据脱敏).xlsx")

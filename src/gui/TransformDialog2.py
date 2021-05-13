@@ -4,7 +4,7 @@ from PySide2.QtCore import Slot
 from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QDialog
 
-from src.gui.UI.Ui_TransformDialog2 import Ui_TransformDialog2
+from src.gui.UI_file.Ui_TransformDialog2 import Ui_TransformDialog2
 from src.transform_tools.transform_tool2 import TransformTool2
 from src.utils.exist_util import ExistUtil
 from src.utils.excel_loader import ExcelLoader
