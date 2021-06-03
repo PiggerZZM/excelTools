@@ -29,8 +29,8 @@ class DesensitizeUtil:
                     # worksheet[col + str(index)] = random_id
 
         # 日期列脱敏处理
-        col_list = date_col_list.split(' ')
-        if len(col_list) != 0:
+        if col_list != '':
+            col_list = date_col_list.split(' ')
             for col in col_list:
                 coln = str_to_int(col) - 1
                 # 枚举excel中的所有行
