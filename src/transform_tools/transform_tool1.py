@@ -9,7 +9,9 @@ from src.utils.str_to_int import str_to_int
 
 
 class TransformTool1:
-
+    """
+    "行列转置"功能
+    """
     def __init__(self, workbook: Workbook, worksheet, data_row_begin: int,
                  data_row_end: int, data_col_begin: int, data_col_end: int):
         self.workbook = workbook

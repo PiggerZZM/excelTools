@@ -1,4 +1,7 @@
 def str_to_int(chs: str) -> int:
+    """
+    将Excel英文列名转为数值
+    """
     if chs[0].isdigit():
         return int(chs)
     else:

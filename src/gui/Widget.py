@@ -4,7 +4,7 @@ from PySide2.QtCore import QRect, Slot, Qt
 from PySide2.QtWidgets import QFileDialog, QHBoxLayout, QVBoxLayout, QLabel, QLineEdit, QPushButton, QTextEdit, QWidget, \
     QComboBox
 
-from src.transform_tools.transform_tool3 import TransformTool3
+from src.transform_tools.header_to_pinyin_tool import HeaderToPinyinTool
 from src.unmerge_tools.unmerge_tool import UnmergeTool
 from src.utils.exist_util import ExistUtil
 from src.utils.excel_loader import ExcelLoader
@@ -139,8 +139,8 @@ class Widget(QWidget):
             workbook, worksheet = excel_loader.load_excel()
             logging.info("读取{}成功！".format(filename))
             self.show_text("读取{}成功！".format(filename))
-            transform_tool3 = TransformTool3(worksheet)
-            transform_tool3.excute()
+            header_to_pinyin_tool = HeaderToPinyinTool(worksheet)
+            header_to_pinyin_tool.excute()
             workbook.save(filename.split('/')[-1].replace(".xlsx", "_" + sheetname + "(表头转拼音).xlsx"))
             logging.info("表头转拼音成功！")
             self.show_text("表头转拼音成功！")

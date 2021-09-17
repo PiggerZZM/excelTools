@@ -8,7 +8,9 @@ from src.utils.excel_loader import ExcelLoader
 
 
 class TransformTool2:
-
+    """
+    "只转换上表头"
+    """
     def __init__(self, workbook: Workbook, worksheet, begin_row: int, end_row: int):
         self.workbook = workbook
         self.worksheet = worksheet
