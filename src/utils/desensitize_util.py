@@ -41,5 +41,5 @@ class DesensitizeUtil:
                     # 跳过表头
                     if row_index == 1:
                         continue
-                    random_date = datetime(randint(1940, 2020), randint(1, 12), randint(1, 30))
+                    random_date = datetime(randint(1940, 2020), randint(1, 12), randint(1, 28))
                     worksheet.cell(row_index, coln + 1, random_date)

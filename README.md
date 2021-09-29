@@ -3,7 +3,7 @@
 ## V3.2版本信息(2021-9-17发布)
 
 - `Pyside2==5.15.1`
-- `Python==3.7.8`
+- `Python==3.7.10`
 - `openpyxl==3.0.5`
 - `cryptography==3.4.7`
 - `pypinyin==0.41.0`
@@ -114,4 +114,21 @@ Mac OS下输出文件位置在`home`目录
 - 解密后输出文件名为`源文件名_decrypt`
 - 数据脱敏输出文件名为`原文件名_工作表名(数据脱敏).xlsx`
 
+## 已知问题
+
+在MacOS系统下，需要修改系统变量（如.zprofile文件中）添加命令
+
+```
+export QT_MAC_WANTS_LAYER = 1
+```
+
+或者在代码最前面增加
+
+```python
+import os
+
+os.environ['QT_MAC_WANTS_LAYER'] = '1'
+```
+
 ## To-Do-List
+

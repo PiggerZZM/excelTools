@@ -1,4 +1,5 @@
 import logging
+import os
 import sys
 
 from PySide2.QtWidgets import QApplication
@@ -13,6 +14,8 @@ from src.gui.Widget import Widget
 from src.gui.MainWindow import MainWindow
 
 if __name__ == '__main__':
+    # 解决Mac OS下不运行的问题
+    os.environ['QT_MAC_WANTS_LAYER'] = '1'
 
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
